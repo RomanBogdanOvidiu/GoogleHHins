@@ -7,13 +7,12 @@ public class Endpoint {
     private int id;
     private int latency;
     private int nrOfCacheServers;
-    private List<Integer> caches;
+  
 
-    public Endpoint(int id, int latency, int nrOfCacheServers,List<Integer> caches) {
+    public Endpoint(int id, int latency, int nrOfCacheServers) {
         this.id = id;
         this.latency = latency;
         this.nrOfCacheServers = nrOfCacheServers;
-        this.caches = caches;
     }
 
     public int getId() {
@@ -40,11 +39,4 @@ public class Endpoint {
         this.nrOfCacheServers = nrOfCacheServers;
     }
 
-    public List<Integer> getCaches() {
-        return caches;
-    }
-
-    public void setCaches(List<Integer> caches) {
-        this.caches = caches;
-    }
 }

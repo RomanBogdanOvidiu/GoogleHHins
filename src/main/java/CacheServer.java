@@ -1,28 +1,39 @@
+import java.util.List;
+
 /**
  * Created by ilyes on 2/23/2017.
  */
 public class CacheServer {
-    private int id;
-    private int latency;//latency
+	private int id;
+	private int latency;// latency
+	private List<Integer> caches;
 
-    public CacheServer(int id, int latency) {
-        this.id = id;
-        this.latency = latency;
-    }
+	public List<Integer> getCaches() {
+		return caches;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public void setCaches(List<Integer> caches) {
+		this.caches = caches;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public CacheServer(int id, int latency) {
+		this.id = id;
+		this.latency = latency;
+	}
 
-    public int getLatency() {
-        return latency;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setLatency(int latency) {
-        this.latency = latency;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getLatency() {
+		return latency;
+	}
+
+	public void setLatency(int latency) {
+		this.latency = latency;
+	}
 }
