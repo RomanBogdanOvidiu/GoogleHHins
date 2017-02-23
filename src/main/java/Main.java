@@ -11,8 +11,10 @@ import java.util.Scanner;
  */
 public class Main {
     private final static String FILE_NAME = "D:\\untitled\\me_at_the_zoo.in";
+
     /**
      * Read file (not so elegant... but works)
+     *
      * @param fileName the name of the input file
      * @return a String with the contents of the file
      */
@@ -24,7 +26,7 @@ public class Main {
             br = new BufferedReader(new FileReader(fileName));
             String sCurrentLine = new String();
             while ((sCurrentLine = br.readLine()) != null) {
-                entireFile+=sCurrentLine;
+                entireFile += sCurrentLine;
             }
         } catch (IOException e) {
 
@@ -34,6 +36,7 @@ public class Main {
 
     /**
      * Reads integers from file (yet again not elegant... but number of fucks given.equals(new Integer(0))
+     *
      * @param fileName the name of the file
      * @return the list of integers from the file
      * @throws IOException because why dafuq not
@@ -42,7 +45,7 @@ public class Main {
         Path filePath = Paths.get(fileName);
         Scanner scanner = new Scanner(filePath);
         List<Integer> integers = new ArrayList<>();
-        while(scanner.hasNext()){
+        while (scanner.hasNext()) {
             if (scanner.hasNextInt()) {
                 integers.add(scanner.nextInt());
             } else {
@@ -58,31 +61,19 @@ public class Main {
         FileWriter fw = null;
 
         try {
-
-
-
             fw = new FileWriter(FILE_NAME);
             bw = new BufferedWriter(fw);
             bw.write(content);
-
             System.out.println("Done");
-
         } catch (IOException e) {
-
             e.printStackTrace();
-
         } finally {
-
             try {
-
                 if (bw != null)
                     bw.close();
-
                 if (fw != null)
                     fw.close();
-
             } catch (IOException ex) {
-
                 ex.printStackTrace();
 
             }
@@ -90,6 +81,7 @@ public class Main {
         }
 
     }
+
     private int getTotalLatency(List<Endpoint> endPoints, List<RequestDescription> reqDescriptions) {
         int totalL = 0;
         for (RequestDescription r : reqDescriptions) {
@@ -102,7 +94,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         List<Integer> numbers = new ArrayList<>();
         try {
             numbers = readParams(FILE_NAME);
@@ -116,13 +108,13 @@ public class Main {
         Integer cacheSize = numbers.get(4);
         List<Video> listOfVideos = new ArrayList<>(videos);
         List<Endpoint> endP = new ArrayList<>(endPoints);
-        for(int i=0;i<videos;i++){
-            Video v = new Video(i,numbers.get(5+i));
+        for (int i = 0; i < videos; i++) {
+            Video v = new Video(i, numbers.get(5 + i));
             listOfVideos.add(v);
         }
         Iterator<Integer> it = numbers.iterator();
-        for(int i=0;i<5+videos;i++){
-            if(it.hasNext()){
+        for (int i = 0; i < 5 + videos; i++) {
+            if (it.hasNext()) {
                 Integer iasfd = it.next();
                 it.remove();
             }
@@ -130,30 +122,33 @@ public class Main {
 
 
         int num = 0;
-        for(int i=0;i<endPoints;i++){
+        for (int i = 0; i < endPoints; i++) {
             int latency = numbers.get(num);
             num++;
             int connectedCaches = numbers.get(num);
             num++;
-            Endpoint end = new Endpoint(i,latency,connectedCaches,null);
+            Endpoint end = new Endpoint(i, latency, connectedCaches, null);
             List<CacheServer> cacheS = new ArrayList<>();
-            for(int j=0;j<connectedCaches;j++){
-                CacheServer cs = new CacheServer(numbers.get(num),numbers.get(num+1));
+            for (int j = 0; j < connectedCaches; j++) {
+                CacheServer cs = new CacheServer(numbers.get(num), numbers.get(num + 1));
                 cacheS.add(cs);
-                num+=2;
+                num += 2;
             }
             end.setCaches(cacheS);
             endP.add(end);
         }
         it = numbers.iterator();
-        for(int i=0;i<num;i++){
-            if(it.hasNext()){
+        for (int i = 0; i < num; i++) {
+            if (it.hasNext()) {
                 Integer iasfd = it.next();
                 it.remove();
             }
         }
 
-        System.out.println("yes");
+        num = 0;
+        for (int i = 0; i < requests; i++) {
+            
+        }
 
     }
 

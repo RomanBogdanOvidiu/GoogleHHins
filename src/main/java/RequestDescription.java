@@ -4,6 +4,12 @@ public class RequestDescription {
 	private int videoId;
 	private int noOfReq;
 
+	public RequestDescription(int endPointId, int videoId, int noOfReq) {
+		this.endPointId = endPointId;
+		this.videoId = videoId;
+		this.noOfReq = noOfReq;
+	}
+
 	public int getEndPointId() {
 		return endPointId;
 	}
