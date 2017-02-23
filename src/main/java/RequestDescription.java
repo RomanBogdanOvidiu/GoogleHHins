@@ -3,6 +3,15 @@ public class RequestDescription {
 	private int endPointId;
 	private int videoId;
 	private int noOfReq;
+	private int totalLatency;
+
+	public int getTotalLatency() {
+		return totalLatency;
+	}
+
+	public void setTotalLatency(int totalLatency) {
+		this.totalLatency = totalLatency;
+	}
 
 	public int getEndPointId() {
 		return endPointId;
