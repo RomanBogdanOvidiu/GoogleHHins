@@ -164,28 +164,22 @@ public class Main {
 		/** End of read **/
 
 		getTotalLatency(endP, reqs);
-		Collections.sort(reqs, new Comparator<RequestDescription>() {
-			@Override
-			public int compare(RequestDescription o1, RequestDescription o2) {
-				return o1.getTotalLatency() > o2.getTotalLatency() ? -1
-						: (o1.getTotalLatency() < o2.getTotalLatency()) ? 1 : 0;
-			}
+
+		Collections.sort(reqs, (o1, o2) -> {
+			return o1.getTotalLatency() > o2.getTotalLatency() ? -1
+					: (o1.getTotalLatency() < o2.getTotalLatency()) ? 1 : 0;
 		});
 
 		for (Endpoint endpoint : endP) {
-			Collections.sort(endpoint.getCaches(), new Comparator<CacheServer>() {
-				@Override
-				public int compare(CacheServer o1, CacheServer o2) {
-					return o1.getLatency() > o2.getLatency() ? -1 : (o1.getLatency() < o2.getLatency()) ? 1 : 0;
-				}
+			Collections.sort(endpoint.getCaches(), (o1, o2) -> {
+				return o1.getLatency() > o2.getLatency() ? -1 : (o1.getLatency() < o2.getLatency()) ? 1 : 0;
 			});
 
 		}
 
 		reqs.stream().forEach(r -> endP.stream().forEach(endpoint -> {
-
 			if (endpoint.getId() == r.getEndPointId()) {
-
+				
 			}
 		}));
 

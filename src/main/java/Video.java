@@ -2,20 +2,27 @@
  * Created by ilyes on 2/23/2017.
  */
 public class Video {
-    private int id;
-    private int size;
+	public int getSize() {
+		return size;
+	}
 
-    public Video(int id, int size) {
-        this.id = id;
-        this.size = size;
-    }
+	public void setSize(int size) {
+		this.size = size;
+	}
 
+	private int id;
+	private int size;
 
-    public int getId() {
-        return id;
-    }
+	public Video(int id, int size) {
+		this.id = id;
+		this.size = size;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }
