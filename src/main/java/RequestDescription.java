@@ -3,11 +3,20 @@ public class RequestDescription {
 	private int endPointId;
 	private int videoId;
 	private int noOfReq;
+	private int totalLatency;
 
 	public RequestDescription(int endPointId, int videoId, int noOfReq) {
 		this.endPointId = endPointId;
 		this.videoId = videoId;
 		this.noOfReq = noOfReq;
+	}
+
+	public int getTotalLatency() {
+		return totalLatency;
+	}
+
+	public void setTotalLatency(int totalLatency) {
+		this.totalLatency = totalLatency;
 	}
 
 	public int getEndPointId() {
