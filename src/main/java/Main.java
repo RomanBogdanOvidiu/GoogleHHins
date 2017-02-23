@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ import java.util.Scanner;
  * Created by ilyes on 2/23/2017.
  */
 public class Main {
-    private final static String FILE_NAME = "D:\\Google\\small.in";
+    private final static String FILE_NAME = "D:\\untitled\\me_at_the_zoo.in";
     /**
      * Read file (not so elegant... but works)
      * @param fileName the name of the input file
@@ -88,5 +89,40 @@ public class Main {
 
         }
 
+    }
+
+    public static void main(String[] args){
+        List<Integer> numbers = new ArrayList<>();
+        try {
+            numbers = readParams(FILE_NAME);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Integer videos = numbers.get(0);
+        Integer endPoints = numbers.get(1);
+        Integer requests = numbers.get(2);
+        Integer caches = numbers.get(3);
+        Integer cacheSize = numbers.get(4);
+        List<Video> listOfVideos = new ArrayList<>(videos);
+        for(int i=0;i<videos;i++){
+            Video v = new Video(i,numbers.get(5+i));
+            listOfVideos.add(v);
+        }
+        Iterator<Integer> it = numbers.iterator();
+        for(int i=0;i<5+videos;i++){
+            if(it.hasNext()){
+                numbers.remove(it.next());
+            }
+        }
+        
+        List<Endpoint> endP = new ArrayList<>(endPoints);
+        for(int i=0;i<endPoints;i){
+            int latency = numbers.get(5+videos+i);
+            int connectedCaches = numbers.get(5+videos+i+1);
+            Endpoint end = new Endpoint(i,latency,connectedCaches,null);
+            for(int j=0;j<connectedCaches;j++){
+                CacheServer cs = new CacheServer(numbers.get(5+videos+i+1+))
+            }
+        }
     }
 }
