@@ -166,8 +166,9 @@ public class Main {
 		reqs = getRequests(numbers, num, requests);
 		/** End of read **/
 
-		for (Cache cache : cacheList) {
-			cache.setSize(cacheSize);
+		for (int i = 0; i < caches; i++) {
+			Cache c = new Cache(i, cacheSize, new ArrayList<>());
+			cacheList.add(c);
 		}
 
 		getTotalLatency(endP, reqs);
@@ -187,8 +188,7 @@ public class Main {
 			if (endpoint.getId() == r.getEndPointId()) {
 				boolean check = false;
 				int i = 0;
-				System.out.println("MORTII MATII");
-				while (!check && i < cacheList.size()) {
+				while (!check && i < endpoint.getCaches().size()) {
 					if (cacheList.get(endpoint.getCaches().get(i).getId()).getSize() >= listOfVideos.get(r.getVideoId())
 							.getSize()) {
 						cacheList.get(endpoint.getCaches().get(i).getId())
@@ -203,13 +203,11 @@ public class Main {
 				}
 			}
 		}));
-		System.out.println("SIO MURIT DUMITRU");
-
 		for (Cache c : cacheList) {
-			System.out.println("SIMPLU");
+			System.out.println(" SIMPLU");
 			System.out.print("size: " + c.getSize() + " ");
 			c.getListOfVids().stream().forEach(number -> {
-				System.out.print("numar");
+				System.out.print(" ");
 				System.out.print(number);
 			});
 		}
