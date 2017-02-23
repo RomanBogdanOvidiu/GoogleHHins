@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Created by ilyes on 2/23/2017.
  */
 public class Main {
-	private final static String FILE_NAME = "D:\\untitled\\me_at_the_zoo.in";
+	private final static String FILE_NAME = "C:\\Users\\Bogdan\\Documents\\GoogleHHins\\src\\main\\java\\me_at_the_zoo.in";
 
 	/**
 	 * Read file (not so elegant... but works)
@@ -139,6 +139,9 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+
+		List<Cache> cacheList = new ArrayList<>();
+
 		int num = 5;
 		List<Integer> numbers = new ArrayList<>();
 		List<Video> listOfVideos;
@@ -163,6 +166,10 @@ public class Main {
 		reqs = getRequests(numbers, num, requests);
 		/** End of read **/
 
+		for (Cache cache : cacheList) {
+			cache.setSize(cacheSize);
+		}
+
 		getTotalLatency(endP, reqs);
 
 		Collections.sort(reqs, (o1, o2) -> {
@@ -172,16 +179,40 @@ public class Main {
 
 		for (Endpoint endpoint : endP) {
 			Collections.sort(endpoint.getCaches(), (o1, o2) -> {
-				return o1.getLatency() > o2.getLatency() ? -1 : (o1.getLatency() < o2.getLatency()) ? 1 : 0;
+				return o1.getLatency() < o2.getLatency() ? -1 : (o1.getLatency() > o2.getLatency()) ? 1 : 0;
 			});
 
 		}
-
 		reqs.stream().forEach(r -> endP.stream().forEach(endpoint -> {
 			if (endpoint.getId() == r.getEndPointId()) {
-				
+				boolean check = false;
+				int i = 0;
+				System.out.println("MORTII MATII");
+				while (!check && i < cacheList.size()) {
+					if (cacheList.get(endpoint.getCaches().get(i).getId()).getSize() >= listOfVideos.get(r.getVideoId())
+							.getSize()) {
+						cacheList.get(endpoint.getCaches().get(i).getId())
+								.setSize(cacheList.get(endpoint.getCaches().get(i).getId()).getSize()
+										- listOfVideos.get(r.getVideoId()).getSize());
+						cacheList.get(endpoint.getCaches().get(i).getId()).getListOfVids()
+								.add(listOfVideos.get(i).getId());
+						check = true;
+					} else {
+						i++;
+					}
+				}
 			}
 		}));
+		System.out.println("SIO MURIT DUMITRU");
+
+		for (Cache c : cacheList) {
+			System.out.println("SIMPLU");
+			System.out.print("size: " + c.getSize() + " ");
+			c.getListOfVids().stream().forEach(number -> {
+				System.out.print("numar");
+				System.out.print(number);
+			});
+		}
 
 	}
 
