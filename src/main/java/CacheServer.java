@@ -6,15 +6,6 @@ import java.util.List;
 public class CacheServer {
 	private int id;
 	private int latency;// latency
-	private List<Integer> caches;
-
-	public List<Integer> getCaches() {
-		return caches;
-	}
-
-	public void setCaches(List<Integer> caches) {
-		this.caches = caches;
-	}
 
 	public CacheServer(int id, int latency) {
 		this.id = id;

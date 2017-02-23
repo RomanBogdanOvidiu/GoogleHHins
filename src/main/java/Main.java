@@ -94,34 +94,17 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
-        List<Integer> numbers = new ArrayList<>();
-        try {
-            numbers = readParams(FILE_NAME);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Integer videos = numbers.get(0);
-        Integer endPoints = numbers.get(1);
-        Integer requests = numbers.get(2);
-        Integer caches = numbers.get(3);
-        Integer cacheSize = numbers.get(4);
-        List<Video> listOfVideos = new ArrayList<>(videos);
-        List<Endpoint> endP = new ArrayList<>(endPoints);
+    private static List<Video> getVideos(List<Integer> numbers,int num,int videos){
+        List<Video> listOfVideos = new ArrayList<>();
         for (int i = 0; i < videos; i++) {
-            Video v = new Video(i, numbers.get(5 + i));
+            Video v = new Video(i, numbers.get(num++));
             listOfVideos.add(v);
         }
-        Iterator<Integer> it = numbers.iterator();
-        for (int i = 0; i < 5 + videos; i++) {
-            if (it.hasNext()) {
-                Integer iasfd = it.next();
-                it.remove();
-            }
-        }
+        return listOfVideos;
+    }
 
-
-        int num = 0;
+    private static List<Endpoint> getEndpoints(List<Integer> numbers,int num,int endPoints){
+        List<Endpoint> endP = new ArrayList<>();
         for (int i = 0; i < endPoints; i++) {
             int latency = numbers.get(num);
             num++;
@@ -137,18 +120,44 @@ public class Main {
             end.setCaches(cacheS);
             endP.add(end);
         }
-        it = numbers.iterator();
-        for (int i = 0; i < num; i++) {
-            if (it.hasNext()) {
-                Integer iasfd = it.next();
-                it.remove();
-            }
-        }
+        return endP;
+    }
 
-        num = 0;
+    private static List<RequestDescription> getRequests(List<Integer> numbers,int num,int requests){
+        List<RequestDescription> reqs = new ArrayList<>();
         for (int i = 0; i < requests; i++) {
-            
+            int videoId = numbers.get(num++);
+            int endPointId = numbers.get(num++);
+            int noOfRequests = numbers.get(num++);
+            RequestDescription r = new RequestDescription(endPointId,videoId,noOfRequests);
+            reqs.add(r);
         }
+        return reqs;
+    }
+    public static void main(String[] args) {
+        int num = 5;
+        List<Integer> numbers = new ArrayList<>();
+        List<Video> listOfVideos;
+        List<Endpoint> endP;
+        List<RequestDescription> reqs;
+        try {
+            numbers = readParams(FILE_NAME);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Integer videos = numbers.get(0);
+        Integer endPoints = numbers.get(1);
+        Integer requests = numbers.get(2);
+        Integer caches = numbers.get(3);
+        Integer cacheSize = numbers.get(4);
+        listOfVideos = getVideos(numbers,num,videos);
+        num+=videos;
+        endP = getEndpoints(numbers,num,endPoints);
+        for(int i=0;i<endPoints;i++){
+            num+=2+2*endP.get(i).getNrOfCacheServers();
+        }
+        reqs = getRequests(numbers,num,requests);
+        /** End of read **/
 
     }
 
