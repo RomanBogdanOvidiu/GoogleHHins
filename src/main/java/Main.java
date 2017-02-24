@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Created by ilyes on 2/23/2017.
  */
 public class Main {
-	private final static String FILE_NAME = "C:\\Users\\Bogdan\\Documents\\GoogleHHins\\src\\main\\java\\me_at_the_zoo.in";
+	private final static String FILE_NAME = "C:\\Users\\Bogdan\\Documents\\GoogleHHins\\src\\main\\java\\trending_today.in";
 
 	/**
 	 * Read file (not so elegant... but works)
@@ -140,7 +140,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		List<Cache> cacheList = new ArrayList<>();
+		List<Cache> cacheList = new ArrayList<Cache>();
 
 		int num = 5;
 		List<Integer> numbers = new ArrayList<>();
@@ -188,9 +188,16 @@ public class Main {
 			if (endpoint.getId() == r.getEndPointId()) {
 				boolean check = false;
 				int i = 0;
-				while (!check && i < endpoint.getCaches().size()) {
-					if (cacheList.get(endpoint.getCaches().get(i).getId()).getSize() >= listOfVideos.get(r.getVideoId())
-							.getSize()) {
+				while (!check && i < endpoint.getCaches().size()){
+					for(Integer intsd:cacheList.get(endpoint.getCaches().get(i).getId()).getListOfVids()){
+						if(intsd==r.getVideoId()){
+							check = true;
+						}
+					}
+					if(check){
+						break;
+					}
+					if (cacheList.get(endpoint.getCaches().get(i).getId()).getSize() >= listOfVideos.get(r.getVideoId()).getSize()) {
 						cacheList.get(endpoint.getCaches().get(i).getId())
 								.setSize(cacheList.get(endpoint.getCaches().get(i).getId()).getSize()
 										- listOfVideos.get(r.getVideoId()).getSize());
@@ -204,8 +211,7 @@ public class Main {
 			}
 		}));
 		for (Cache c : cacheList) {
-			System.out.println(" SIMPLU");
-			System.out.print("size: " + c.getSize() + " ");
+			System.out.print(c.getSize() + " ");
 			c.getListOfVids().stream().forEach(number -> {
 				System.out.print(" ");
 				System.out.print(number);
