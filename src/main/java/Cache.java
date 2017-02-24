@@ -37,4 +37,24 @@ public class Cache {
 		this.listOfVids = listOfVids;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Cache cache = (Cache) o;
+
+		if (getId() != cache.getId()) return false;
+		if (getSize() != cache.getSize()) return false;
+		return getListOfVids() != null ? getListOfVids().equals(cache.getListOfVids()) : cache.getListOfVids() == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getId();
+		result = 31 * result + getSize();
+		result = 31 * result + (getListOfVids() != null ? getListOfVids().hashCode() : 0);
+		return result;
+	}
 }

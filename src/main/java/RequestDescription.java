@@ -1,11 +1,11 @@
 public class RequestDescription {
 
 	private int endPointId;
-	private int videoId;
+	private Integer videoId;
 	private int noOfReq;
 	private int totalLatency;
 
-	public RequestDescription(int endPointId, int videoId, int noOfReq) {
+	public RequestDescription(int endPointId, Integer videoId, int noOfReq) {
 		this.endPointId = endPointId;
 		this.videoId = videoId;
 		this.noOfReq = noOfReq;
@@ -27,11 +27,11 @@ public class RequestDescription {
 		this.endPointId = endPointId;
 	}
 
-	public int getVideoId() {
+	public Integer getVideoId() {
 		return videoId;
 	}
 
-	public void setVideoId(int videoId) {
+	public void setVideoId(Integer videoId) {
 		this.videoId = videoId;
 	}
 
